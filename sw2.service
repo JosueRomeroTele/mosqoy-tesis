@@ -1,0 +1,12 @@
+[Unit]
+Description=sw2
+After=syslog.target
+
+[Service]
+User=root
+WorkingDirectory=/var/sw2
+ExecStart=/usr/bin/java -jar sw2.jar
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

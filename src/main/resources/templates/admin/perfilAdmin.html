@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/general-admin.html ::admin-head(title='¡Bienvenido!')">
+
+    </head>
+    <body id="page-top">
+
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+
+            <!-- Sidebar -->
+            <div th:replace="fragments/general-admin.html ::admin-sidebar(param1='...',param2='...')"></div>
+            <!-- End of Sidebar -->
+
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- Main Content -->
+                <div id="content">
+
+                    <div th:replace="fragments/general-admin.html :: topbar"></div>
+
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800" th:text="${'Bienvenido, '+user.fullname}">Perfil del Admin</h1>
+                        </div>
+                        <div id="msg" th:if="${msg != null}" th:text="${msg}" class="alert alert-success py-1"
+                             role="alert"></div>
+                        <div id="msgGestor" th:if="${msgError != null}" th:text="${msgError}"
+                             class="alert alert-danger py-1" role="alert"></div>
+
+                        <div class="col-lg-9 mx-auto">
+
+                            <!-- Profile widget -->
+                            <div class="bg-white shadow rounded overflow-hidden mb-5">
+                                <div class="px-4 pt-0 pb-4" style="background-color: #9d9ea9!important">
+                                    <div class="media align-items-end profile-header">
+                                        <div class="profile mr-3 mt-3">
+                                            <a data-toggle="modal" data-target="#showFoto" href="#"
+                                            >
+                                                <img th:if="session.usuario.foto!=''"  th:src="@{'/admin/gestor/fotoUser' + '?id=' + ${session.usuario.idusuarios} }"
+                                                     alt="..." width="130" class="rounded mb-2 img-thumbnail" style="
+                                                        object-fit: contain;
+                                                        width: 128px;
+                                                        height: 128px;">
+                                            </a>
+
+                                            <a th:attr=" data-id=${session.usuario.idusuarios}"
+                                               data-toggle="modal" data-target="#editprofile"
+                                               style="color: white"
+                                               class="editar-perfil btn btn-dark btn-sm btn-block">Editar
+                                                perfil</a>
+
+
+                                        </div>
+
+                                        <div class="media-body mt-3 mb-2 text-white">
+                                            <h4 class="mt-0 mb-4" th:text="${session.usuario.getFullname()}"></h4>
+                                            <p class="small mb-2"><i class="fa fa-user-circle mr-2"></i><span
+                                                    th:text="${session.usuario.idusuarios}"></span></p>
+                                            <p class="small mb-2"><i class="fa fa-mail-bulk mr-2"></i><span
+                                                    th:text="${session.usuario.correo}"></span></p>
+                                            <p class="small mb-2"><i class="fa fa-phone mr-2"></i><span
+                                                    th:text="${session.usuario.telefono}"></span></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="py-4 px-4">
+                                    <div class="d-flex align-items-center justify-content-between mb-3">
+                                        <h5 class="mb-0">¡Bienvenido a la familia de Mosqoy!</h5>
+                                        <a href="https://es.mosqoy.org/" class="btn btn-link text-muted" target="_blank">Ir a página oficial de
+                                            Mosqoy</a>
+                                    </div>
+                                    <div class="py-4">
+                                        <div class="mx-auto  img-fluid d-block"><img
+                                                th:src="@{/img/comunidad.jpg}"
+                                                alt="" class="img-fluid rounded shadow-sm"></div>
+                                        <!--div class="col-lg-6 mb-2 pr-lg-1"><img
+                                                src="https://res.cloudinary.com/mhmd/image/upload/v1556294928/nicole-honeywill-546848-unsplash_ymprvp.jpg"
+                                                alt="" class="img-fluid rounded shadow-sm"></div>
+                                        <div class="col-lg-6 mb-2 pl-lg-1"><img
+                                                src="https://res.cloudinary.com/mhmd/image/upload/v1556294927/dose-juice-1184444-unsplash_bmbutn.jpg"
+                                                alt="" class="img-fluid rounded shadow-sm"></div>
+                                        <div class="col-lg-6 pr-lg-1 mb-2"><img
+                                                src="https://res.cloudinary.com/mhmd/image/upload/v1556294926/cody-davis-253925-unsplash_hsetv7.jpg"
+                                                alt="" class="img-fluid rounded shadow-sm"></div>
+                                        <div class="col-lg-6 pl-lg-1"><img
+                                                src="https://res.cloudinary.com/mhmd/image/upload/v1556294928/tim-foster-734470-unsplash_xqde00.jpg"
+                                                alt="" class="img-fluid rounded shadow-sm"></div-->
+                                    </div>
+                                    <!--div class="py-4">
+                                        <div class="d-flex align-items-center justify-content-between mb-3">
+                                            <h5 class="mb-1">Quotes</h5>
+                                            <button data-toggle="modal" data-target="#noteModal" class="btn btn-link text-muted">Modificar</button>
+                                        </div>
+                                        <div-- class="p-4 bg-light rounded shadow-sm">
+                                            <p class="font-italic mb-0">Lorem ipsum dolor sit amet, consectetur
+                                                adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                                                dolore magna aliqua. Ut enim ad minim veniam.</p>
+                                        </div>
+                                    </div-->
+                                </div>
+                                <div class="bg-light px-4 pt-4 pb-2 d-flex justify-content-between text-center">
+                                    <li class="list-inline-item pt-3">
+                                        <h5 class="font-weight-bold mb-2 d-block" >Cifras Globales:</h5>
+                                    </li>
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item">
+                                            <h5 class="font-weight-bold mb-0 d-block" th:text="${cantGestores!=null? cantGestores : '0'}">241</h5>
+                                            <small class="text-muted"> <i class="fa fa-picture-o mr-1"></i>Gestores</small>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <h5 class="font-weight-bold mb-0 d-block" th:text="${cantSedes!=null? cantSedes : '0'}">84K</h5>
+                                            <small class="text-muted"> <i class="fa fa-user-circle-o mr-1"></i>Sedes</small>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <h5 class="font-weight-bold mb-0 d-block" th:text="${stock_total!=null? stock_total : '0'}">84K</h5>
+                                            <small class="text-muted"> <i class="fa fa-user-circle-o mr-1"></i>Productos</br>Registrados</small>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- End profile widget -->
+                        </div>
+
+
+                    </div>
+                    <!-- /.container-fluid -->
+
+                </div>
+                <!-- End of Main Content -->
+
+                <div th:replace="fragments/general-admin.html :: footer"></div>
+
+            </div>
+            <!-- End of Content Wrapper -->
+
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Logout Modal-->
+        <div th:replace="fragments/general-admin.html :: logout-modal"></div>
+
+        <!-- Bootstrap core JavaScript-->
+        <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+        <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+        <script th:src="@{/js/gestor/perfil.js}"></script>
+
+
+        <!-- Modal Form-->
+        <div class="modal fade" id="editprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="formTitle" class="modal-title">Editar Perfil</h5>
+                        <button type="button" th:href="@{/admin/perfil}" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <a type="button"
+                               th:href="@{/admin/perfil}"
+                               class="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </a>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" th:action="@{/admin/save}" th:object="${user}" enctype="multipart/form-data">
+                            <input hidden readonly type="text" class="form-control" th:field="*{idusuarios}">
+
+                            <div class="form-group">
+                                <label class="col-form-label">Nombre:</label>
+                                <input type="text" class="form-control" th:field="*{nombre}">
+                                <div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">
+                                    Error
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Apellido:</label>
+                                <input type="text" class="form-control" th:field="*{apellido}">
+                                <div class="text-danger" th:if="${#fields.hasErrors('apellido')}"
+                                     th:errors="*{apellido}">Error
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Teléfono:</label>
+                                <input type="number" class="form-control" th:field="*{telefono}">
+                                <div class="text-danger" th:if="${#fields.hasErrors('telefono')}"
+                                     th:errors="*{telefono}">Error
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <img id="foto" class="rounded-pill" width="100" style="height: auto;" th:src="@{'/admin/gestor/fotoUser' + '?id=' + ${user.idusuarios} } ">
+                            </div>
+                            <div class="form-group mb-0">
+                                <label for="photo" class="col-form-label">Editar foto (Opcional, Máx 2MB):</label>
+                                <input type="file" id="photo" name="photo">
+                                <div class="text-danger" th:if="${#fields.hasErrors('foto')}" th:errors="*{foto}">
+                                    Error
+                                </div>
+                                <label for="photo" class="col-form-label">*Para mantener la foto original, no seleccione una foto</label>
+                            </div>
+                            <div class="form-check form-group" th:if="${user.foto!='defaultprofile.png'}">
+                                <input class="form-check-input" type="checkbox" name="deletefoto"
+                                       id="deletefoto">
+                                <label class="form-check-label" for="deletefoto">Borrar foto actual</label>
+                            </div>
+                            <input hidden="hidden" type="text" name="deletefoto"/>
+                            <div class="modal-footer">
+                                <a type="button" th:href="@{/admin/perfil}" class="btn btn-secondary">Cancelar</a>
+                                <button type="submit" class="btn btn-info"><a style="color:white;text-decoration:none">Actualizar</a>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Foto -->
+        <div th:if="${user.foto!='defaultprofile.png'}" id="showFoto" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="fototitle"> Tu foto </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body" style="    position: relative;
+                                                        flex: 1 1 auto;
+                                                        padding: 1rem;
+                                                        height: 488px;">
+                        <img th:id="foto"
+                             th:src="'/admin/fotoUser?id='+${session.usuario.idusuarios}"
+
+                             alt="Foto no disponible:(" style=" position: absolute;
+                                                    top: 0;
+                                                    left: 0;
+                                                    bottom: 0;
+                                                    right: 0;
+                                                    margin: auto;
+                                                    width: auto;
+                                                    height: auto;
+                                                    max-width: 100%;
+                                                    max-height: 100%;"
+                             src="">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

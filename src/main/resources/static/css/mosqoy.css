@@ -1,0 +1,147 @@
+th, .d-sm-inline-block {
+    white-space: nowrap;
+}
+
+#showFoto .modal-content {
+    width: auto;
+    height: auto;
+
+}
+@media(min-width: 576px){
+.modal-dialog {
+    max-width: 583px;
+    margin: 1.75rem auto;
+}
+}
+.topbar.navbar-light .navbar-nav .nav-item .nav-link {
+    color: #515785;
+}
+
+.card ,.modal-content{
+    font-size: .78rem;
+}
+.form-control,.input-group-text{
+    font-size: .9rem;
+}
+
+.h3 {
+    font-weight: bold ;
+}
+
+p {
+    font-size: .9rem;
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item.active, .sidebar .nav-item .collapsing .collapse-inner .collapse-item.active {
+    color: #211b1b ;
+    font-weight: 800 ;
+}
+
+.btn {
+    padding: .3rem 0.6rem ;
+    font-size: .8rem ;
+}
+
+thead, tfoot {
+    background-color: #5b5b5be6;
+    color: #ffffff;
+    position: sticky;
+}
+
+.bg-gradient-gestor {
+    background-color: #ffffff;
+    background-image: linear-gradient(180deg, #b13c43 10%, #6b302a 100%);
+    background-size: cover;
+}
+.bg-gradient-sede {
+    background-color: #ffffff;
+    background-image: linear-gradient(180deg, #e08447 50%, #903e21 100%);
+    background-size: cover;
+}
+.bg-gradient-admin {
+    background-color: #ffffff;
+    background-image: linear-gradient(180deg, #763a5dfa 50%, #661d3d 100%);
+    background-size: cover;
+}
+.bg-top {
+    background-color: #ffffff96 ;
+}
+@media (min-width: 768px) {
+    .sidebar .nav-item .nav-link span {
+        font-size: 0.82rem ;
+        display: inline ;
+    }
+
+    .sidebar.toggled .nav-item .nav-link span {
+        font-size: .65rem ;
+        display: block ;
+    }
+
+    .sidebar {
+        width: 13.6rem!important ;
+    }
+}
+.sidebar .nav-item .collapse .collapse-inner, .sidebar .nav-item .collapsing .collapse-inner {
+    font-size: 0.8rem;
+}
+.page-link {
+    color: #36b9cc;
+}
+.page-link:hover {
+    color: #2c9faf;
+}
+.page-item.active .page-link {
+    color: #fff;
+    background-color: #36b9cc;
+    border-color: #36b9cc;
+}
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #36b9cc;
+}
+.btn-link {
+    color: #b13c43;
+}
+.btn-link:hover {
+    color: #6b302a;
+}
+
+.table-responsive .fototabla{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+button.show-foto,button.show-fotoU{
+    padding: 0px;
+    width: 80px;
+    height: 80px;
+    box-shadow: 3px 3px 5px!important;
+    background-color: #ffffff;
+}
+.btn{
+    box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2);
+}
+td.tdfoto {
+    text-align: center;
+    padding: 17px;
+}
+@media (min-width: 992px) {
+    .modal-body {
+        padding: 1rem 3rem;
+    }
+}
+.forminv{
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+.sidebar-brand img {
+    -webkit-filter: drop-shadow(3px 3px 4px #000);
+    filter: drop-shadow(3px 3px 4px #000);
+}
+.list-inline .list-inline-item {
+    vertical-align: top;
+    max-width: 80px;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}

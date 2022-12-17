@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html class="h-100" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Mensaje Enviado</title>
+
+    <!-- Custom fonts for this template-->
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-dark mh-100" >
+<div style="position: fixed; top: 0px; width: 100%; object-position: 50% 50%; background-size: cover; background-position: center center; background-repeat: no-repeat; height: 120%;
+  transform: translate3d(0px, 0px, 0px);
+  background-image: url(https://static.wixstatic.com/media/61652e_edeefa4f2e424501bb4dabf1649c670d~mv2_d_5219_3479_s_4_2.jpg/v1/fill/w_1920,h_1280,al_c,q_85,usm_0.66_1.00_0.01/61652e_edeefa4f2e424501bb4dabf1649c670d~mv2_d_5219_3479_s_4_2.webp)"
+> </div>
+<div class="cover-container d-flex w-100 h-100 p-1 mx-auto flex-column">
+    <div class="container my-auto">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg" style="background-color: rgba(255,255,255, 0.8) !important; ">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 container-fluid my-auto mx-auto">
+                                <img class="mx-auto  img-fluid d-block" th:src="@{/img/MosqoyGreen.png}" alt="cat2">
+                            </div>
+                            <div class="col-lg-6 mx-auto my-auto">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Mensaje enviado!</h1>
+                                    </div>
+                                    <form class="user">
+                                        <div class="form-group">
+                                            <img class="mx-auto  img-fluid d-block" th:src="@{/img/messageBottle.jpg}" alt="Responsive image">
+                                        </div>
+                                        <h5 class="text-dark">Te hemos enviado un mensaje al correo con el que te registraste para que puedas recuperar tu contraseña</h5>
+
+                                        <a th:href="@{/loginForm}" class="btn btn-primary btn-user btn-block">
+                                            Volver a Iniciar Sesión
+                                        </a>
+
+
+                                        <div th:replace="fragments/general :: footer"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+</body>
+
+</html>

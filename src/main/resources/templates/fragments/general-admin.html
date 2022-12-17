@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="admin-head(title)">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon"
+          th:href="@{/img/colibriAdmin.png}" >
+    <title th:text="${title}"></title>
+    
+    
+    <!-- Custom fonts for this template-->
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    
+    <!-- Custom styles for this template-->
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+    
+    <!-- Custom styles for this page -->
+    <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+    <link th:href="@{/css/mosqoy.css}" rel="stylesheet">
+    <style th:if="${title!='¡Ups!'}">
+        #content-wrapper {
+            background: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.46)), fixed center no-repeat url(https://cdn.pixabay.com/photo/2017/03/29/10/23/peru-2184732_1280.jpg);
+            background-size: cover;
+        }
+        h1.text-gray-800 {
+            text-shadow: 0px 4px 4px #ffffffd1, 2px 2px 1px #ffffff;
+            color: #3c3c3c!important;
+        }
+    </style>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js"
+            crossorigin="anonymous"></script>
+    
+</head>
+<body>
+
+<!-- Topbar -->
+<nav th:fragment="topbar" class="navbar navbar-expand navbar-light bg-top topbar mb-4 static-top shadow">
+
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" style="color: #2b1b1bcc;" class=" btn btn-link d-md-none rounded-circle">
+        <i class="fa fa-bars"></i>
+    </button>
+    <div class="ml-3  font-weight-bold " style="font-size: 1.1rem;font-style: italic;color: #2b1b1bcc;">Administrador</div>
+    <!-- Topbar Search
+    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-dark" type="button">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form> -->
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+
+        
+        <!--<div th:replace="fragments/notification.html :: notification-center"></div>-->
+
+        <div class="topbar-divider d-none d-sm-block"></div>
+
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-lg-inline font-weight-bold "
+                      style="font-size: 0.9rem;color: #2b1b1bcc;" th:text="${session.usuario.getFullname()}"></span>
+                <img th:if="session.usuario.foto!=''" class="img-profile rounded-circle" th:src="'/admin/fotoUser?id='+${session.usuario.idusuarios}">
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                 aria-labelledby="userDropdown">
+                <a class="dropdown-item" th:href="@{/admin/perfil}">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Ver Mi Perfil
+                </a>
+
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Cerrar Sesión
+                </a>
+            </div>
+        </li>
+
+    </ul>
+
+</nav>
+<!-- End of Topbar -->
+
+<!-- Footer -->
+<footer th:fragment="footer" class="sticky-footer bg-top">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <em><small><span>@Software para telecomunicaciones 2 &copy; Mosqoy - 2020</span></small></em>
+        </div>
+    </div>
+</footer>
+<!-- End of Footer -->
+
+
+<!-- Sidebar -->
+<ul th:fragment="admin-sidebar(param1,param2)" class="navbar-nav bg-gradient-admin sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/admin}">
+        <i class="fas"> <img style="width: 88%;height: 88%;" th:src="@{/img/colibriiiii.png}" alt="."></i>
+        <div class="sidebar-brand-text ml-0"><img style="width: 103%;height: 103%;" th:src="@{/img/mosqLOGO-min.png}" alt="."></div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard
+    <li class="nav-item " th:classappend="${param1=='Dashboard'}? active : ''">
+        <a class="nav-link" href="index.html">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>-->
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Sistema
+    </div>
+
+    <!-- Nav Item - Usuarios Collapse Menu -->
+    <li class="nav-item" th:classappend="${param1=='Usuarios'}? active : ''">
+        <a class="nav-link " th:classappend="${param1=='Usuarios'}?  '' : collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Usuarios</span>
+        </a>
+        <div id="collapseTwo" class="collapse" th:classappend="${param1=='Usuarios'}?  show : ''" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" th:classappend="${param2=='Gestor Principal'}?  active : ''" th:href="@{/admin/gestor}">Gestor Principal</a>
+                <a class="collapse-item" th:classappend="${param2=='Sede'}?  active : ''" th:href="@{/admin/sede}">Usuario Sede</a>
+            </div>
+        </div>
+    </li>
+
+
+    <!-- Nav Item - Inventario -->
+    <li class="nav-item" th:classappend="${param1=='Inventario'}? active : ''">
+        <a class="nav-link" th:href="@{/admin/inventario}">
+            <i class="fas fa-fw fa-clipboard-list"></i>
+            <span>Inventario</span></a>
+    </li>
+
+    <!-- Nav Item - SEDES -->
+    <li class="nav-item" th:classappend="${param1=='Sedes'}? active : ''">
+        <a class="nav-link" th:href="@{/admin/sede/lista}">
+            <i class="fas fa-map-pin fa-clipboard-list"></i>
+            <span>Sedes</span></a>
+    </li>
+
+    <!-- Nav Item - CancelarVenta -->
+    <li class="nav-item" th:classappend="${param1=='Venta'}? active : ''">
+        <a class="nav-link" th:href="@{/admin/venta}">
+            <i class="fas fa-fw fa-times"></i>
+            <span>Cancelar Ventas</span></a>
+    </li>
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
+<!-- End of Sidebar -->
+
+
+<!--Logout Modal -->
+<div th:fragment="logout-modal" class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form th:action="@{/logout}" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cerrar Sesión</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Seleccione "Cerrar sesión" si está listo para cerrar su sesión actual.
+                    <div class="modal-footer mt-3">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-info" >Cerrar sesión</button>
+                    </div>
+                </div>
+                
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/general-gestor.html ::gestor-head(title='Notificaciones')">
+</head>
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="fragments/general-gestor.html ::gestor-sidebar(param1='...',param2='...')"></div>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <div th:replace="fragments/general-gestor.html :: topbar"></div>
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-900">Notificaciones</h1>
+                </div>
+
+
+
+                <div class="container text-dark pb-4">
+                    <div class="input-group input-group-lg mb-5">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Buscar</button>
+                        </div>
+                        <input class="form-control" type="text" aria-label="Text input " placeholder="" />
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-xl-3 mb-5">
+                            <div class="card">
+                                <div class="list-group list-group-flush small">
+                                    <a class="list-group-item list-group-item-action" href="#!"><i class="fas fa-exclamation-triangle fa-fw mr-2 text-gray-400"></i>Alertas</a>
+                                    <a class="list-group-item list-group-item-action" href="#!"><i class="fas fa-archive fa-fw mr-2 text-gray-400"></i>General</a>
+                                    <a class="list-group-item list-group-item-action" href="#!"><i class="fas fa-trash-alt fa-fw mr-2 text-gray-400"></i>Borrado</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-xl-9">
+                            <div class="card mb-2">
+                                <div class="list-group list-group-flush">
+                                    <a class="list-group-item list-group-item-action py-4" href="#!"
+                                    ><div class="d-flex justify-content-between">
+                                        <div class="mr-4 d-flex">
+                                            <div class="icon-stack icon-stack bg-green-soft text-green flex-shrink-0 mr-4"><i data-feather="check"></i></div>
+                                            <div>
+                                                <h6>Alerta #290225</h6>
+                                                <p class="card-text">Hubo un problema con el producto yyyyyy enviado, la informacion es la siguiente: El porducto llego en mal estado</p>
+                                            </div>
+                                        </div>
+                                        <div class="small text-gray-800 flex-shrink-0 text-right">
+                                            12:13 PM<br />
+                                            <div class="badge badge-green-soft badge-pill text-dark">1 de Mayo 2020</div>
+                                        </div>
+                                    </div></a
+                                    ><a class="list-group-item list-group-item-action py-4" href="#!"
+                                ><div class="d-flex justify-content-between">
+                                    <div class="mr-4 d-flex">
+                                        <div class="icon-stack icon-stack bg-red-soft text-red flex-shrink-0 mr-4"><i data-feather="x"></i></div>
+                                        <div>
+                                            <h6>Alerta #290234</h6>
+                                            <p class="card-text">Hubo un problema con el producto yyyyyy enviado, la informacion es la siguiente: El porducto llego en mal estado</p>
+                                        </div>
+                                    </div>
+                                    <div class="small text-gray-800 flex-shrink-0 text-right">
+                                        10:26 PM<br />
+                                        <div class="badge badge-red-soft badge-pill text-dark">1 de Mayo 2020</div>
+                                    </div>
+                                </div></a
+                                ><a class="list-group-item list-group-item-action py-4" href="#!"
+                                ><div class="d-flex justify-content-between">
+                                    <div class="mr-4 d-flex">
+                                        <div class="icon-stack icon-stack bg-green-soft text-green flex-shrink-0 mr-4"><i data-feather="check"></i></div>
+                                        <div>
+                                            <h6>Alerta #290194</h6>
+                                            <p class="card-text">Hubo un problema con el producto yyyyyy enviado, la informacion es la siguiente: El porducto llego en mal estado</p>
+                                        </div>
+                                    </div>
+                                    <div class="small text-gray-800 flex-shrink-0 text-right">
+                                        1:00 PM<br />
+                                        <div class="badge badge-green-soft badge-pill text-dark">1 de Mayo 2020</div>
+                                    </div>
+                                </div></a
+                                ><a class="list-group-item list-group-item-action py-4" href="#!"
+                                ><div class="d-flex justify-content-between">
+                                    <div class="mr-4 d-flex">
+                                        <div class="icon-stack icon-stack bg-yellow-soft text-yellow flex-shrink-0 mr-4"><i data-feather="file-text"></i></div>
+                                        <div>
+                                            <h6>Alerta #290127</h6>
+                                            <p class="card-text">Hubo un problema con el producto yyyyyy enviado, la informacion es la siguiente: El porducto llego en mal estado</p>
+                                        </div>
+                                    </div>
+                                    <div class="small text-gray-800 flex-shrink-0 text-right">
+                                        1:00 PM<br />
+                                        <div class="badge badge-yellow-soft badge-pill text-dark">1 de Mayo 2020</div>
+                                    </div>
+                                </div></a
+                                ><a class="list-group-item list-group-item-action py-4" href="#!"
+                                ><div class="d-flex justify-content-between">
+                                    <div class="mr-4 d-flex">
+                                        <div class="icon-stack icon-stack bg-yellow-soft text-yellow flex-shrink-0 mr-4"><i data-feather="file-text"></i></div>
+                                        <div>
+                                            <h6>Alerta #290078</h6>
+                                            <p class="card-text">Hubo un problema con el producto yyyyyy enviado, la informacion es la siguiente: El porducto llego en mal estado</p>
+                                        </div>
+                                    </div>
+                                    <div class="small text-gray-800 flex-shrink-0 text-right">
+                                        1:00 PM<br />
+                                        <div class="badge badge-yellow-soft badge-pill text-dark">1 de Mayo 2020</div>
+                                    </div>
+                                </div></a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <div th:replace="fragments/general-gestor.html :: footer"></div>
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div th:replace="fragments/general-gestor.html :: logout-modal"></div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+    <!-- Page level plugins -->
+    <script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+
+    <!-- Page level custom scripts -->
+    <script th:src="@{/js/demo/chart-area-demo.js}"></script>
+    <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+
+</body>
+</html>

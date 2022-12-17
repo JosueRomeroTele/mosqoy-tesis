@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/general-gestor.html ::gestor-head(title='Registro del inventario')">
+    </head>
+    <body id="page-top">
+        
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+            
+            <!-- Sidebar -->
+            <div th:replace="fragments/general-gestor.html ::gestor-sidebar(param1='Inventario',param2='...')"></div>
+            <!-- End of Sidebar -->
+            
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+                
+                <!-- Main Content -->
+                <div id="content">
+                    
+                    <div th:replace="fragments/general-gestor.html :: topbar"></div>
+                    
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+                        
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-white">Inventario</h1>
+                        
+                        </div>
+                        <div id="msg" th:if="${msg != null}" th:text="${msg}" class="alert alert-warning py-1"
+                             role="alert"></div>
+                        
+                        <div class="container">
+                            <!-- DataTales Example -->
+                            <div class="card shadow mb-lg-4 mx-lg-5">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Registro de nuevo producto del inventario</h5>
+                                        <a th:href="@{/gestor/inventario}" type="button" class="close">
+                                            &times;
+                                        </a>
+                                    </div>
+                                    
+                                    <div class="modal-body px-lg-5 px-md-0">
+                                        <form id="addForm" method="post" th:action="@{/gestor/inventario/save}"
+                                              th:object="${inventario}" enctype="multipart/form-data">
+                                            <div class="form-row mx-4">
+                                                <div class="form-group col-4">
+                                                    <label class="col-form-label"><b>Pedido:</b></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text text-body">N°</div>
+                                                        </div>
+                                                        <input th:field="*{numpedido}" min="1" type="number"
+                                                               class="form-control" required>
+                                                    </div>
+                                                    <div class="text-danger" th:if="${#fields.hasErrors('numpedido')}"
+                                                         th:errors="*{numpedido}">Error
+                                                    </div>
+                                                
+                                                </div>
+                                            
+                                            
+                                            </div>
+                                            
+                                            
+                                            <div class="form-row mx-4">
+                                                <div class="form-group col">
+                                                    <label class="col-form-label"><b>Categoría:</b></label>
+                                                    <select th:field="*{categorias}" class="form-control">
+                                                        <option value="">--- Seleccionar ---</option>
+                                                        <option th:each="item : ${listCat}"
+                                                                th:text="${item.nombre}"
+                                                                th:value="${item.codigo}"></option>
+                                                    </select>
+                                                    <div class="text-danger" th:if="${#fields.hasErrors('categorias')}"
+                                                         th:errors="*{categorias}">Error
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col">
+                                                    <label for="linea" class="col-form-label"><b>Línea:</b></label>
+                                                    <select id="linea" name="productos.id.codigolinea" class="form-control" disabled>
+                                                        <option value="no">--- Seleccionar ---</option>
+                                                        <option th:each="item : ${lineas}"
+                                                                th:selected="${item.key==linea}"
+                                                                th:text="${item.value}"
+                                                                th:value="${item.key}"></option>
+                                                    </select>
+                                                    <div class="text-danger" th:if="${#fields.hasErrors('cantidadgestor')}"
+                                                         th:errors="*{cantidadgestor}">Error
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col">
+                                                    <label class="col-form-label"><b>Producto:</b></label>
+                                                    <select id="productos" name="productos.id.codigonom" class="form-control">
+                                                        <option th:text="${listProd==null? '-Debe elegir una línea-':'--- Seleccionar ---'}" value=""></option>
+                                                        <option th:each="item : ${listProd}"
+                                                                th:selected="${item.codigonom==pr}"
+                                                                th:value="${item.codigonom}"
+                                                                th:text="${item.nombre}"></option>
+                                                    </select>
+                                                    <div class="text-danger" th:if="${#fields.hasErrors('productos')}"
+                                                         th:errors="*{productos}">Error
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-row mx-4">
+                                                <div class="form-group col-4">
+                                                    <label class="col-form-label"><b>Tamaño:</b></label>
+                                                    <select th:field="*{codtamanho}" class="form-control">
+                                                        <option value="">--- Seleccionar ---</option>
+                                                        <option th:each="t : ${taman}" th:text="${t.value}"
+                                                                th:value="${t.key}"></option>
+                                                    </select>
+                                                    <div class="text-danger" th:if="${#fields.hasErrors('codtamanho')}"
+                                                         th:errors="*{codtamanho}">Error
+                                                    </div>
+                                                
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-row mx-4">
+                                                <div class="form-group col-4">
+                                                    <label class="col-form-label"><b>Color:</b></label>
+                                                    <input th:field="*{color}" type="text" class="form-control">
+                                                    <div class="text-danger" th:if="${#fields.hasErrors('color')}"
+                                                         th:errors="*{color}">Error
+                                                    </div>
+                                                
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-row mx-4">
+                                                <div class="form-group col-4">
+                                                    <label class="col-form-label"><b>Modo de adquisición:</b></label>
+                                                    <select th:field="*{codAdquisicion}" class="form-control" disabled>
+                                                        <option th:each="t : ${tipoAdqui}" th:text="${t.value}"
+                                                                th:value="${t.key}"></option>
+                                                    </select>
+                                                    <div class="text-danger"
+                                                         th:if="${#fields.hasErrors('codAdquisicion')}"
+                                                         th:errors="*{codAdquisicion}">Error
+                                                    </div>
+                                                
+                                                </div>
+                                                <div class="form-group col-4">
+                                                    <label class="col-form-label"><b>Comunidad:</b></label>
+                                                    <select th:field="*{comunidades}" class="form-control">
+                                                        <option value="">--- Seleccionar ---</option>
+                                                        <option th:each="item : ${listCom}"
+                                                                th:text="${item.getNombre()}"
+                                                                th:value="${item.getCodigo()}"></option>
+                                                    </select>
+                                                    <div class="text-danger" th:if="${#fields.hasErrors('comunidades')}"
+                                                         th:errors="*{comunidades}">Error
+                                                    </div>
+                                                
+                                                </div>
+                                                <div th:hidden="${inventario.codAdquisicion!=1}"
+                                                     id="artesanoConsignacion" class="form-group col-4">
+                                                    <label
+                                                            class="col-form-label"><b>Artesano:</b></label>
+                                                    <select th:field="*{artesanos}" class="form-control">
+                                                        <option th:text="${listArt==null? '-Debe elegir una comunidad-':'--- Seleccionar ---'}" value=""></option>
+                                                        <option th:each="item : ${listArt}"
+                                                                th:value="${item.codigo}"
+                                                                th:text="|${item.nombre} ${item.apellidopaterno}|"></option>
+                                                    </select>
+                                                    <div class="text-danger" th:if="${#fields.hasErrors('artesanos')}"
+                                                         th:errors="*{artesanos}">Error
+                                                    </div>
+                                                
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-row mx-4">
+                                                <label class="col-form-label"><b>Costos unitarios:</b></label>
+                                            </div>
+                                            
+                                            
+                                            <div class="form-row mx-4">
+                                                
+                                                <div class="form-group col-4">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text text-body">S/.</div>
+                                                        </div>
+                                                        <input th:field="*{costotejedor}" type="number"
+                                                               step='0.01' min="0.01" required
+                                                               class="form-control"
+                                                               placeholder="000.00">
+                                                        <div class="input-group-append">
+                                                            <div class="input-group-text text-body">(Tejedor)</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-danger"
+                                                         th:if="${#fields.hasErrors('costotejedor')}"
+                                                         th:errors="*{costotejedor}">Error
+                                                    </div>
+                                                
+                                                </div>
+                                                
+                                                <div class="form-group col-4">
+                                                    
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text text-body">S/.</div>
+                                                        </div>
+                                                        <input th:field="*{costomosqoy}" type="number" th:min="${inventario.costotejedor==null? 0.01 : inventario.costotejedor+0.01}"
+                                                               step='0.01'
+                                                               class="form-control" required
+                                                               placeholder="000.00">
+                                                        <div class="input-group-append">
+                                                            <div class="input-group-text text-body">(Mosqoy)</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-danger"
+                                                         th:if="${#fields.hasErrors('costomosqoy')}"
+                                                    
+                                                         th:errors="*{costomosqoy}">Error
+                                                    </div>
+                                                
+                                                
+                                                </div>
+                                            </div>
+                                            <div class="form-row mx-4">
+                                                <div class="form-group col-4">
+                                                    <label class="col-form-label"><b>Facilitador:</b></label>
+                                                    <input th:field="*{facilitador}" type="text" class="form-control" required>
+                                                    <div class="text-danger" th:if="${#fields.hasErrors('facilitador')}"
+                                                         th:errors="*{facilitador}">Error
+                                                    </div>
+                                                
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            <div class="form-row mx-4">
+                                                
+                                                <div class="form-group col-4">
+                                                    
+                                                    <label class="col-form-label"><b>Fecha de adquisición:</b></label>
+                                                    
+                                                    <input th:hidden="${inventario.dia==0}" th:disabled="${inventario.dia==0}" id="fechadia" type="date"
+                                                           name="fechadia"
+                                                           class="form-control" required
+                                                           th:value="${inventario.fechaadquisicion}" th:max="${todayd}">
+                                                    <input th:hidden="${inventario.dia!=0}" th:disabled="${inventario.dia!=0}" id="fechames" type="month"
+                                                           name="fechames"
+                                                           class="form-control" th:max="${todaym}" required
+                                                           th:value="${inventario.mes<10? inventario.anho+'-0'+inventario.mes  : inventario.anho+'-'+inventario.mes}">
+                                                    <div class="text-danger" th:if="${#fields.hasErrors('dia')}"
+                                                         th:errors="*{dia}">Error
+                                                    </div>
+                                                    <div class="form-check ">
+                                                        <input th:checked="${inventario.dia!=0}"
+                                                               class="form-check-input" type="checkbox" name="conDia"
+                                                               id="conDia" disabled>
+                                                        <label class="form-check-label" for="conDia">Con día</label>
+                                                        <input hidden="hidden" type="text" name="conDia"/>
+                                                    </div>
+                                                
+                                                </div>
+                                                
+                                                <div th:hidden="${inventario.codAdquisicion!=1}" th:disabled="${inventario.codAdquisicion!=1}"
+                                                     id="vencimientoConsignacion" class="form-group col-4">
+                                                    <label class="col-form-label"><b>Fecha de
+                                                        vencimiento(consignación):</b></label>
+                                                    <input th:field="*{fechavencimientoconsignacion}" type="date"
+                                                           class="form-control">
+                                                    <div class="text-danger"
+                                                         th:if="${#fields.hasErrors('fechavencimientoconsignacion')}"
+                                                         th:errors="*{fechavencimientoconsignacion}">Error
+                                                    </div>
+                                                
+                                                </div>
+                                                <div class="form-group col-4">
+                                                
+                                                
+                                                </div>
+                                            
+                                            
+                                            </div>
+                                            
+                                            
+                                            <div class="form-row mx-4">
+                                                <div class="form-group col-4">
+                                                    <label class="col-form-label"><b>Cantidad:</b></label>
+                                                    <input th:field="*{cantidadtotal}" min="1" type="number"
+                                                           class="form-control" required>
+                                                    <div class="text-danger"
+                                                         th:if="${#fields.hasErrors('cantidadtotal')}"
+                                                         th:errors="*{cantidadtotal}">Error
+                                                    </div>
+                                                
+                                                </div>
+                                            </div>
+                                            <div class="form-row mx-4">
+                                                <div class="form-group">
+                                                    <label for="foto1" class="col-form-label"><b>Foto (Máximo 2MB) - Opcional<br>Soportado: .jpg, .jpeg, .png</b></label>
+                                                    <input type="file" id="foto1" name="foto1">
+                                                    <div class="text-danger" th:if="${#fields.hasErrors('foto')}" th:errors="*{foto}">Error</div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a class="btn btn-secondary " th:href="@{/gestor/inventario}">Cancelar</a>
+                                                
+                                                <input disabled id="invAdd" form="addForm" type="submit" class="btn btn-info" value="Agregar">
+                                            
+                                            </div>
+                                        </form>
+                                    </div>
+                                
+                                
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    <!-- /.container-fluid -->
+                
+                </div>
+                <!-- End of Main Content -->
+                
+                <div th:replace="fragments/general-gestor.html :: footer"></div>
+            
+            </div>
+            <!-- End of Content Wrapper -->
+        
+        </div>
+        <!-- End of Page Wrapper -->
+        
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        
+        <!-- Logout Modal-->
+        
+        <div id="confirmModal" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Nuevo Registro (Confirmación)</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Solo se podrán editar los siguientes campos: <b> Costo Mosqoy, Costo Tejedor, Facilitador y Fecha de vencimiento</b> (en caso de haber adquirido el producto mediante consignación)</p>
+                        <p>Al presionar <b>"Confirmar"</b> , usted confirma que todos los campos ingresados son <b>correctos</b>. En caso de querer cambiar un campo <b>no editable</b> , se tendrá que borrar el antiguo registro y crear uno nuevo.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button id="confirmbtn" type="button" class="btn btn-info">Confirmar</button>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Logout Modal-->
+        <div th:replace="fragments/general-gestor.html :: logout-modal"></div>
+        
+        
+        <!-- Bootstrap core JavaScript-->
+        <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+        <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+        
+        <!-- Core plugin JavaScript-->
+        <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+        
+        <!-- Custom scripts for all pages-->
+        <script th:src="@{/js/sb-admin-2.min.js}"></script>
+        
+        <!-- Page level plugins -->
+        <script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+        <script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+        
+        <!-- Page level custom scripts -->
+        <script th:src="@{/js/demo/datatables-demo.js}"></script>
+        
+        <script th:src="@{/js/gestor/inventario.js}"></script>
+    
+    </body>
+</html>

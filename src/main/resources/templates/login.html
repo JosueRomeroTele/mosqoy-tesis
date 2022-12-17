@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html class="h-100" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" th:href="@{/img/colibriiiii.ico}">
+  
+  <title>Iniciar Sesión</title>
+
+  <!-- Custom fonts for this template-->
+  <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+
+</head>
+  <!--body class="bg-gradient-dark mh-100" style="background-size: cover;
+  transform: translate3d(0px, 0px, 0px);
+  background: fixed no-repeat url(https://static.wixstatic.com/media/61652e_edeefa4f2e424501bb4dabf1649c670d~mv2_d_5219_3479_s_4_2.jpg/v1/fill/w_1920,h_1280,al_c,q_85,usm_0.66_1.00_0.01/61652e_edeefa4f2e424501bb4dabf1649c670d~mv2_d_5219_3479_s_4_2.webp)";
+  
+  -->
+<!--  class="bg-gradient-dark mh-100"   -->
+<body class="bg-gradient-dark mh-100" >
+  <div style="position: fixed; top: 0px; width: 100%; object-position: 50% 50%; background-size: cover; background-position: center center; background-repeat: no-repeat; height: 120%;
+  transform: translate3d(0px, 0px, 0px);
+  background-image: url(https://static.wixstatic.com/media/61652e_edeefa4f2e424501bb4dabf1649c670d~mv2_d_5219_3479_s_4_2.jpg/v1/fill/w_1920,h_1280,al_c,q_85,usm_0.66_1.00_0.01/61652e_edeefa4f2e424501bb4dabf1649c670d~mv2_d_5219_3479_s_4_2.webp)"
+  > </div>
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"
+
+
+>
+  <div class="container my-auto">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+      <div class="col-xl-10 col-lg-12 col-md-9">
+
+          <div class="card o-hidden border-0 shadow-lg my-5" style="background-color: rgba(255,255,255, 0.8) !important; ">
+          <div class="card-body p-0" >
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6 container-fluid my-auto mx-auto" >
+                <img class="mx-auto  img-fluid d-block" th:src="@{/img/mosqoyRed1.png}" alt="Responsive image" >
+              </div>
+              <div class="col-lg-6 mx-auto">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">¡Bienvenido!</h1>
+                  </div>
+                  <div  th:if="${msgError != null}" th:text="${msgError}" class="alert alert-danger py-1" role="alert"></div>
+
+                  <!-- Google auth-->
+                  <div class="card-body p-2 text-center">
+                    <div th:each="url : ${urls}"  class="col s12 m6 offset-m3 center-align">
+                      <a  th:href="${url.value}" class="oauth-container btn btn-dark darken-4 white black-text"  style="text-transform:none">
+                        <div class="left">
+                          <img width="20px" style="margin-top:7px; margin-right:8px" alt="Google sign-in"
+                               src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                        </div>
+                        O inicia sesión con Google
+                      </a>
+                    </div>
+                  </div>
+
+                  <!---->
+
+                  <form th:action="@{/processLogin}" method="post" class="user">
+                    <div class="form-group">
+                      <input type="email" class="form-control form-control-user" name="username" id="username" aria-describedby="emailHelp" placeholder="Ingresa tu email...">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control form-control-user" name="password" id="password" placeholder="Contraseña">
+                    </div>
+                    <h6 th:if="${param.error}" class="form-signin-heading" style="color:#ff0000">Usuario o contraseña incorrectos<incorrectos></incorrectos></h6>
+
+
+                    <button type="submit" class="btn btn-dark btn-user btn-block" >
+
+                      Iniciar Sesión
+                    </button>
+                   <!--btn-user -->
+                  </form>
+                  <br>
+                  <div class="text-center">
+                    <a class="small" style="color:#5e5a5a" th:href="@{/forgotPassword}">¿Olvidaste tu contraseña?</a>
+                  </div>
+
+                  <footer th:fragment="footer"  >
+                    <div class="container my-auto">
+                      <div class="copyright text-center my-auto">
+                        <hr>
+                        <em><small><span>@Software para telecomunicaciones 2 &copy; Mosqoy - 2020</span></small></em>
+                      </div>
+                    </div>
+                  </footer>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+  <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+</body>
+
+</html>

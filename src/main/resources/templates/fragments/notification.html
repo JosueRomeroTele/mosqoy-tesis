@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<li id="notification" th:fragment="notification-center" class="nav-item dropdown no-arrow mx-1">
+    <a class="dropdownButton nav-link dropdown-toggle" type="button"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i  class="fas fa-bell fa-fw" style="color: #2b1b1bcc;"></i><!-- Counter - Alerts -->
+        <span id="number" class="badge badge-danger badge-counter"></span>
+    </a>
+    <!-- Dropdown - Alerts -->
+    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+        <h6 class="dropdown-header">Notificaciones</h6>
+        <div id="notificationBody">
+
+        </div>
+        <a class="dropdown-item text-center small text-gray-500" href="#">Mostrar todas las notificaciones</a>
+    </div>
+</li>
+</body>
+</html>

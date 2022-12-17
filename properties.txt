@@ -1,0 +1,11 @@
+server.port: 443
+security.require-ssl=true
+server.ssl.key-store:/etc/letsencrypt/live/www.mosqoy.dns-cloud.net/keystore.p12
+server.ssl.key-store-password:sw2
+server.ssl.keyStoreType: PKCS12
+server.ssl.keyAlias: tomcat
+spring.datasource.url=jdbc:mysql://mosqoy.czcr7l22f15c.us-east-1.rds.amazonaws.com:3306/mosqoy?serverTimezone=America/Lima
+spring.datasource.username=administrador
+spring.datasource.password=administrador
+
+

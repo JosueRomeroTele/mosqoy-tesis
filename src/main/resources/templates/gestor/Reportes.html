@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head  th:replace="fragments/general-gestor.html ::gestor-head(title='Reportes')"></head>
+
+
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="fragments/general-gestor.html ::gestor-sidebar(param1='Reportes',param2='...')"></div>
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+                <div th:replace="fragments/general-gestor.html :: topbar"></div>
+
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-white">Reportes</h1>
+                </div>
+
+                <div class="row mt-1">
+
+                    <div class="col-lg-9 col-sm-11 mx-auto">
+
+                        <!-- Collapsable Card Example -->
+                        <div class="p-3 bg-white rounded shadow-sm">
+                            <h4 class="border-bottom border-gray text-dark pb-2 mb-0">Ventas </h4>
+                            <div class="media text-muted pt-3">
+                                <div class="icon-circle bg-gradient-dark"><i class="fas fa-file-alt text-white"></i></div>
+                                <div class="media-body pl-4 pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                    <div class="d-flex justify-content-between align-items-center w-100">
+                                        <h5><strong class="text-gray-dark">Generar</strong></h5>
+                                        <button data-toggle="modal" data-target="#reporteVentaModal" type="button"
+                                                class="reporte-Ventas d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                                class="fas fa-file fa-sm text-white-50"></i> Generar reporte
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--
+                            <small class="d-block text-right mt-3">
+                                <a href="#">All suggestions</a>
+                            </small>-->
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <div th:replace="fragments/general-gestor.html :: footer"></div>
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div th:replace="fragments/general-gestor.html :: logout-modal"></div>
+
+
+<div class="modal fade" id="reporteVentaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="formTitleVentaModal" class="modal-title">Generar reporte de ventas</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="reporteForm" th:action="@{/gestor/reportes/generate}" >
+                    <div id="fields1" class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group" >
+                                <label for="ordenar" class="col-form-label">Ordenar Por</label>
+                                <select class="form-control" id="ordenar" name="ordenar">
+                                    <option selected value="0"> --- Seleccionar un campo --- </option>
+                                    <option value="1"> Total </option>
+                                    <option  value="2"> Sede </option>
+                                    <option  value="3"> Articulo(Producto) </option>
+                                    <option  value="4"> Comunidad </option>
+                                    <option  value="5"> Cliente </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group" id="nombredivSelect" hidden>
+
+                                <label for="nombreselect" class="col-form-label">Nombre</label>
+                                <select class="form-control" id="nombreselect" name="nombreselect">
+                                    <option selected value="0"> --- Seleccionar un campo --- </option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="tipo" class="col-form-label">Tipo</label>
+                                <select class="form-control" id="tipo" name="tipo">
+                                    <option selected value="0"> --- Seleccionar un tipo --- </option>
+                                    <option  value="1"> Anual </option>
+                                    <option  value="2"> Trimestral </option>
+                                    <option  value="3"> Mensual </option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div hidden id="fields2" class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="years" class="col-form-label">Año</label>
+                                <select class="form-control" id="years" name="years">
+                                    <option selected value="0"> --- Seleccionar año --- </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div hidden id="tipoSelectDiv" class="col-sm-6">
+                            <div class="form-group">
+                                <label for="tipoSelect" class="col-form-label"></label>
+                                <select class="form-control" id="tipoSelect" name="tipoSelect">
+                                    <option selected value="0"> --- Seleccionar un tipo --- </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal"  class="btn btn-secondary " >Cancelar</button>
+                        <button type="submit" class="btn btn-info"><a style="color:white;text-decoration:none">Generar</a></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+<!-- Page level plugins -->
+<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+<!-- Page level custom scripts -->
+
+<script th:src="@{/js/gestor/extra.js}"></script>
+
+
+<script th:src="@{/js/gestor/reportes.js}"></script>
+</body>
+</html>

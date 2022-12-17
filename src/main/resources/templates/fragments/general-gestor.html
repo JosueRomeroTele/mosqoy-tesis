@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:fragment="gestor-head(title)">
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon"
+              th:href="@{/img/mosqoyRed1.png}">
+        <title th:text="${title}"></title>
+        
+        <!-- Custom fonts for this template-->
+        <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+              rel="stylesheet">
+        
+        <!-- Custom styles for this template-->
+        <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+        <!-- Custom styles for this page -->
+        <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+        <!-- Custom styles for mosqoy-->
+        <link th:href="@{/css/mosqoy.css}" rel="stylesheet">
+        <style th:if="${title!='¡Ups!'}">
+            #content-wrapper {
+                background: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.46)), fixed no-repeat center url(https://cdn.pixabay.com/photo/2016/11/19/15/38/craftsman-1839920_960_720.jpg);
+                background-size: cover;
+            }
+            
+            h1 {
+                text-shadow: -2px 0 3px #0000006b, 2px 0 3px #000000;
+            }
+        </style>
+
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    </head>
+    <body>
+        
+        <!-- Topbar -->
+        <nav th:fragment="topbar" class="navbar navbar-expand navbar-dark bg-top topbar mb-4 static-top shadow">
+            
+            <!-- Sidebar Toggle (Topbar) -->
+            <button id="sidebarToggleTop" style="color: #2b1b1bcc;" class=" btn btn-link d-md-none rounded-circle">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="ml-3  font-weight-bold " style="font-size: 1.1rem;font-style: italic;color: #2b1b1bcc;" th:text="'Gestor principal - ' +  ${session.usuario.getSede().getNombresede()}" >Gestor Principal as1</div>
+            
+            
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+                <div class="topbar-divider d-none d-sm-block"></div>
+                
+                
+                <!--<div th:replace="fragments/notification.html :: notification-center"></div>-->
+                
+                
+                <div class="topbar-divider d-none d-sm-block"></div>
+                
+                <!-- Nav Item - User Information -->
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <span class="mr-2 d-lg-inline font-weight-bold "
+                              style="font-size: 0.9rem;color: #2b1b1bcc;"
+
+                              th:text=" ${session.usuario.getFullname()}"></span>
+                        <img th:if="session.usuario.foto!=''" class="img-profile rounded-circle"
+                             th:src="'/gestor/fotoUser?id='+${session.usuario.idusuarios}" style="
+                                                        object-fit: contain;">
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                         aria-labelledby="userDropdown">
+                        <a class="dropdown-item" th:href="@{/gestor/perfil}">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Ver Mi Perfil
+                        </a>
+                        
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Cerrar Sesión
+                        </a>
+                    </div>
+                </li>
+            
+            </ul>
+        
+        </nav>
+        <!-- End of Topbar -->
+        
+        <!-- Footer -->
+        <footer th:fragment="footer" class="sticky-footer bg-top">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <em><small><span>@Software para telecomunicaciones 2 &copy; Mosqoy - 2020</span></small></em>
+                </div>
+            </div>
+        
+        </footer>
+        <!-- End of Footer -->
+        
+        
+        <!-- Sidebar -->
+        <ul th:fragment="gestor-sidebar(param1,param2)"
+            class="navbar-nav bg-gradient-gestor sidebar sidebar-dark accordion" id="accordionSidebar">
+            
+            <!--li>
+                <img class="sidebar-brand-text mx-5"
+                     type="image" style="width:155px;height:72px;top:0;left:0"
+                        src="https://static.wixstatic.com/media/61652e_ca6aeea7da3440f7a245090f3964e60d~mv2.png/v1/fill/w_225,h_115,al_c,q_85,usm_0.66_1.00_0.01/61652e_ca6aeea7da3440f7a245090f3964e60d~mv2.webp">
+            </li>
+
+            <hr class="sidebar-divider my-0"-->
+            
+            <li class="nav-item">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center"
+                   th:href="@{/gestor}">
+                    <i class="fas"> <img style="width: 88%;height: 88%;" th:src="@{/img/colibriiiii.png}" alt="."></i>
+                    <div class="sidebar-brand-text ml-0"><img style="width: 103%;height: 103%;"
+                                                              th:src="@{/img/mosqLOGO-min.png}" alt="."></div>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider">
+            <!-- Nav Item - Dashboard
+            <li class="nav-item " th:classappend="${param1=='Dashboard'}? active : ''">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>-->
+            
+            <!-- Divider -->
+            <!--li class="nav-item">
+                <div class="nav-link disabled ml-0 text-center" ><span>Gestor Principal</span></div>
+            </li-->
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Inventario
+            </div>
+            
+            <!-- Nav Item - Inventario -->
+            <li class="nav-item" th:classappend="${param1=='Inventario'}? active : ''">
+                <a class="nav-link" th:href="@{/gestor/inventario}">
+                    <i class="fas fa-fw fa-clipboard-list"></i>
+                    <span>Inventario</span></a>
+            </li>
+            
+            <!-- Nav Item - Campos Collapse Menu -->
+            <li class="nav-item" th:classappend="${param1=='Campos'}? active : ''">
+                <a class="nav-link " th:classappend="${param1=='Campos'}?  '' : collapsed" href=""
+                   data-toggle="collapse" data-target="#collapseInv" aria-expanded="true" aria-controls="collapseInv">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Campos del Inventario</span>
+                </a>
+                <div id="collapseInv" class="collapse" th:classappend="${param1=='Campos'}?  show : ''"
+                     aria-labelledby="headingInv" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" th:classappend="${param2=='Categorias'}?  active : ''"
+                           th:href="@{/gestor/categoria}">Categorías</a>
+                        <a class="collapse-item" th:classappend="${param2=='Productos'}?  active : ''"
+                           th:href="@{/gestor/producto}">Productos</a>
+                        <a class="collapse-item" th:classappend="${param2=='Comunidades'}?  active : ''"
+                           th:href="@{/gestor/comunidad}">Comunidades</a>
+                        <a class="collapse-item" th:classappend="${param2=='Artesanos'}?  active : ''"
+                           th:href="@{/gestor/artesano}">Artesanos</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Productos Disponibles -->
+            <li class="nav-item" th:classappend="${param1=='ProductosDisponibles'}? active : ''">
+                <a class="nav-link" th:href="@{/gestor/productosDisponibles}">
+                    <i class="fas fa-fw fa-boxes"></i>
+                    <span>Productos Disponibles</span></a>
+            </li>
+
+            <!-- Nav Item - Gestionar Consignacion -->
+            <li class="nav-item" th:classappend="${param1=='Consignacion'}? active : ''">
+                <a class="nav-link " th:classappend="${param1=='Consignacion'}?  '' : collapsed" href=""
+                   data-toggle="collapse" data-target="#collapseConsig" aria-expanded="true" aria-controls="collapseConsig">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Gestionar Consignación</span>
+                </a>
+                <div id="collapseConsig" class="collapse" th:classappend="${param1=='Consignacion'}?  show : ''"
+                     aria-labelledby="headingInv" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" th:classappend="${param2=='AunVence'}?  active : ''"
+                           th:href="@{/gestor/consignacion/ProxVencer}">Proximos a Vencer</a>
+                        <a class="collapse-item" th:classappend="${param2=='Vencido'}?  active : ''"
+                           th:href="@{/gestor/consignacion/Vencido}">Vencidos</a>
+                        <a class="collapse-item" th:classappend="${param2=='Devuelto'}?  active : ''"
+                           th:href="@{/gestor/consignacion/DevueltosArtesano}">Devueltos al Artesano</a>
+                    </div>
+                </div>
+            </li>
+            
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Sedes
+            </div>
+            
+            
+            <!-- Nav Item - Productos Asignados -->
+            <li class="nav-item" th:classappend="${param1=='Asignados'}? active : ''">
+                <a class="nav-link" th:href="@{/gestor/asignado}">
+                    <i class="fas fa-fw fa-shipping-fast"></i>
+                    <span>Productos Asignados</span></a>
+            </li>
+            <!-- Nav Item - Devoluciones -->
+            <li class="nav-item" th:classappend="${param1=='Devoluciones'}? active : ''">
+                <a th:href="@{/gestor/devoluciones}" class="nav-link">
+                    <i class="fas fa-fw fa-undo-alt"></i>
+                    <span>Devoluciones</span></a>
+            </li>
+            <!-- Nav Item - Sedes -->
+            <li class="nav-item" th:classappend="${param1=='Sedes'}? active : ''">
+                <a class="nav-link" th:href="@{/gestor/sede}">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Usuarios Sede</span></a>
+            </li>
+            
+            <!-- Divider -->
+            <hr class="sidebar-divider ">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Ventas
+            </div>
+            
+            <!-- Nav Item - Ventas -->
+            <li class="nav-item" th:classappend="${param1=='Ventas'}? active : ''">
+                <a th:href="@{/gestor/venta}" class="nav-link">
+                    <i class="fas fa-fw fa-dollar-sign"></i>
+                    <span>Mis ventas</span></a>
+            </li>
+            
+            <!-- Nav Item - Confirmacion -->
+            <li class="nav-item" th:classappend="${param1=='Confirmacion'}? active : ''">
+                <a th:href="@{/gestor/confirmacion}" class="nav-link">
+                    <i class="fas fa-fw fa-file-invoice-dollar"></i>
+                    <span>Confirmacion de venta</span></a>
+            </li>
+            
+            
+            <!-- Divider -->
+            <hr class="sidebar-divider ">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                DATA
+            </div>
+            <!-- Nav Item - Reportes -->
+            <li class="nav-item" th:classappend="${param1=='Reportes'}? active : ''">
+                <a class="nav-link" th:href="@{/gestor/reportes}">
+                    <i class="fas fa-fw fa-file-download"></i>
+                    <span>Reportes</span></a>
+            </li>
+            <li class="nav-item" th:classappend="${param1=='Excel'}? active : ''">
+                <a class="nav-link" th:href="@{/gestor/reportes/excel}">
+                    <i class="fas fa-fw fa-file-download"></i>
+                    <span>Importar Inventario</span></a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link" th:href="@{/gestor/graficos}" >
+                    <i class="fas fa-fw fa-file-download"></i>
+                    <span>Estadísticas</span></a>
+            </li>
+            
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+            
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        
+        </ul>
+        <!-- End of Sidebar -->
+        
+        
+        <!--Logout Modal -->
+        
+        <div th:fragment="logout-modal">
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form th:action="@{/logout}" method="post">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Cerrar Sesión</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Seleccione "Cerrar sesión" si está listo para cerrar su sesión actual.
+                                <div class="modal-footer mt-3">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-info">Cerrar sesión</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    
+    
+    </body>
+</html>
